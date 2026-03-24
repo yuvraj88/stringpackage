@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shreevats — Private Pool Villa, Udaipur</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --sand: #e8ddc8;
+    --terracotta: #c4714a;
+    --terracotta-light: #d4896a;
+    --deep: #1a1208;
+    --brown: #4a3520;
+    --gold: #b8963e;
+    --gold-light: #d4b060;
+    --muted: #8a7a65;
+    --white: #fefcf8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--deep);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(245,240,232,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(74,53,32,0.1);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 500; letter-spacing: 0.08em;
+    color: var(--terracotta);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--brown); text-decoration: none; opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-btn {
+    background: var(--terracotta); color: var(--white) !important; opacity: 1 !important;
+    padding: 10px 24px; border-radius: 2px; font-weight: 500;
+    transition: background 0.2s !important;
+  }
+  .nav-btn:hover { background: var(--brown) !important; }
+
+  /* HERO GALLERY */
+  .hero-gallery {
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 420px 280px;
+    gap: 4px;
+    height: 704px;
+  }
+  .hero-gallery .main-img {
+    grid-column: 1 / 2; grid-row: 1 / 3;
+    position: relative; overflow: hidden;
+  }
+  .hero-gallery .sub1 { grid-column: 2; grid-row: 1; position: relative; overflow: hidden; }
+  .hero-gallery .sub2 { grid-column: 3; grid-row: 1; position: relative; overflow: hidden; }
+  .hero-gallery .sub3 { grid-column: 2; grid-row: 2; position: relative; overflow: hidden; }
+  .hero-gallery .sub4 { grid-column: 3; grid-row: 2; position: relative; overflow: hidden; }
+  .hero-gallery img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .hero-gallery div:hover img { transform: scale(1.04); }
+  .gallery-overlay {
+    position: absolute; bottom: 20px; right: 20px;
+    background: rgba(26,18,8,0.75); color: var(--white);
+    padding: 10px 20px; font-size: 12px; letter-spacing: 0.15em;
+    text-transform: uppercase; cursor: pointer; backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: background 0.2s;
+  }
+  .gallery-overlay:hover { background: rgba(196,113,74,0.9); }
+  .share-row {
+    position: absolute; top: 20px; right: 20px;
+    display: flex; gap: 8px;
+  }
+  .share-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.9); display: flex; align-items: center;
+    justify-content: center; cursor: pointer; font-size: 16px;
+    transition: background 0.2s;
+  }
+  .share-btn:hover { background: var(--terracotta); color: white; }
+
+  /* MAIN CONTENT */
+  .content-wrap {
+    max-width: 1200px; margin: 0 auto; padding: 0 48px;
+    display: grid; grid-template-columns: 1fr 380px; gap: 64px;
+  }
+
+  /* LEFT COLUMN */
+  .left-col { padding-top: 48px; }
+
+  .property-header { margin-bottom: 32px; }
+  .property-location {
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 12px; display: flex;
+    align-items: center; gap: 8px;
+  }
+  .property-location::before {
+    content: ''; width: 24px; height: 1px; background: var(--terracotta);
+  }
+  .property-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px; font-weight: 300; line-height: 1.05;
+    color: var(--deep); letter-spacing: -0.01em; margin-bottom: 16px;
+  }
+  .property-tagline {
+    font-size: 15px; color: var(--muted); line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* QUICK FACTS */
+  .quick-facts {
+    display: flex; gap: 0;
+    border-top: 1px solid var(--sand); border-bottom: 1px solid var(--sand);
+    margin: 32px 0;
+  }
+  .fact {
+    flex: 1; padding: 24px 20px; display: flex; flex-direction: column;
+    gap: 6px; border-right: 1px solid var(--sand);
+  }
+  .fact:last-child { border-right: none; }
+  .fact-icon { font-size: 20px; margin-bottom: 2px; }
+  .fact-label {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .fact-value { font-size: 15px; font-weight: 500; color: var(--brown); }
+
+  /* NAV PILLS */
+  .section-nav {
+    display: flex; gap: 0; border-bottom: 1px solid var(--sand);
+    margin-bottom: 48px; overflow-x: auto;
+  }
+  .section-nav a {
+    padding: 16px 24px; font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted); text-decoration: none;
+    border-bottom: 2px solid transparent; white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .section-nav a.active, .section-nav a:hover {
+    color: var(--terracotta); border-bottom-color: var(--terracotta);
+  }
+
+  /* ABOUT */
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 400; color: var(--deep);
+    margin-bottom: 20px; letter-spacing: -0.01em;
+  }
+  .section-text {
+    font-size: 15px; line-height: 1.85; color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .read-more {
+    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--terracotta); text-decoration: none; border-bottom: 1px solid var(--terracotta);
+    padding-bottom: 2px;
+  }
+  section { margin-bottom: 64px; }
+  .divider {
+    height: 1px; background: var(--sand); margin-bottom: 64px;
+  }
+
+  /* AMENITIES */
+  .amenities-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    margin-bottom: 24px;
+  }
+  .amenity {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px; background: var(--white);
+    border: 1px solid var(--sand); border-radius: 2px;
+  }
+  .amenity-icon { font-size: 20px; flex-shrink: 0; }
+  .amenity-label { font-size: 13px; color: var(--brown); line-height: 1.4; }
+
+  /* ROOMS */
+  .rooms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .room-card {
+    background: var(--white); border: 1px solid var(--sand); overflow: hidden;
+  }
+  .room-card img { width: 100%; height: 160px; object-fit: cover; }
+  .room-info { padding: 16px; }
+  .room-name { font-size: 14px; font-weight: 500; color: var(--deep); margin-bottom: 6px; }
+  .room-bed { font-size: 12px; color: var(--terracotta); margin-bottom: 10px; }
+  .room-detail { font-size: 12px; color: var(--muted); line-height: 1.7; }
+
+  /* EXPERIENCES */
+  .exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .exp-card { position: relative; overflow: hidden; aspect-ratio: 4/3; cursor: pointer; }
+  .exp-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .exp-card:hover img { transform: scale(1.08); }
+  .exp-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(26,18,8,0.85));
+    padding: 32px 16px 16px;
+  }
+  .exp-name { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+  .exp-price { font-size: 12px; color: var(--gold-light); }
+
+  /* REVIEWS */
+  .rating-hero {
+    display: flex; align-items: center; gap: 48px;
+    background: var(--white); border: 1px solid var(--sand);
+    padding: 32px 40px; margin-bottom: 32px;
+  }
+  .rating-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px; font-weight: 300; color: var(--terracotta);
+    line-height: 1;
+  }
+  .rating-label {
+    font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .rating-sub { font-size: 12px; color: var(--muted); }
+  .rating-bars { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px; }
+  .rating-bar-row { display: flex; align-items: center; gap: 12px; }
+  .rating-bar-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); width: 60px; }
+  .rating-bar-track { flex: 1; height: 3px; background: var(--sand); }
+  .rating-bar-fill { height: 100%; background: var(--terracotta); }
+  .rating-num { font-size: 12px; color: var(--brown); font-weight: 500; width: 20px; }
+  .review-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .review-card {
+    background: var(--white); border: 1px solid var(--sand);
+    padding: 24px;
+  }
+  .reviewer { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .reviewer-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--terracotta); color: white; display: flex;
+    align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 18px;
+  }
+  .reviewer-name { font-size: 14px; font-weight: 500; color: var(--deep); }
+  .reviewer-meta { font-size: 11px; color: var(--muted); }
+  .review-stars { color: var(--gold); font-size: 12px; margin-bottom: 10px; }
+  .review-text { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* FAQ */
+  .faq-item {
+    border-bottom: 1px solid var(--sand); padding: 20px 0;
+    cursor: pointer;
+  }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 15px; color: var(--brown); font-weight: 400;
+  }
+  .faq-toggle {
+    width: 24px; height: 24px; border-radius: 50%; background: var(--sand);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; transition: transform 0.3s, background 0.2s; flex-shrink: 0;
+  }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); background: var(--terracotta); color: white; }
+  .faq-a {
+    font-size: 14px; color: var(--muted); line-height: 1.7;
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s;
+    padding-top: 0;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding-top: 16px; }
+
+  /* MAP */
+  .map-placeholder {
+    background: var(--sand); height: 300px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; color: var(--muted); font-size: 13px; letter-spacing: 0.1em;
+    text-transform: uppercase; cursor: pointer;
+    border: 1px solid rgba(74,53,32,0.15);
+    position: relative; overflow: hidden;
+  }
+  .map-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 40% 50%, rgba(196,113,74,0.08), transparent);
+  }
+  .map-icon { font-size: 40px; }
+  .map-btn {
+    margin-top: 8px;
+    background: var(--terracotta); color: white;
+    padding: 10px 24px; font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase; border: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .map-btn:hover { background: var(--brown); }
+
+  /* SIMILAR HOMES */
+  .similar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .similar-card { cursor: pointer; }
+  .similar-img { position: relative; overflow: hidden; aspect-ratio: 4/3; margin-bottom: 14px; }
+  .similar-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .similar-card:hover img { transform: scale(1.06); }
+  .similar-heart {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(255,255,255,0.9); border-radius: 50%;
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; cursor: pointer;
+  }
+  .similar-stars { font-size: 12px; color: var(--gold); margin-bottom: 6px; }
+  .similar-name { font-size: 15px; font-weight: 500; color: var(--deep); margin-bottom: 4px; }
+  .similar-location { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .similar-meta { display: flex; gap: 12px; font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .similar-price { font-size: 14px; font-weight: 500; color: var(--brown); }
+  .similar-price span { font-size: 11px; color: var(--muted); font-weight: 300; }
+
+  /* RIGHT COLUMN — BOOKING CARD */
+  .right-col { padding-top: 48px; }
+  .booking-card {
+    background: var(--white); border: 1px solid var(--sand);
+    padding: 32px; position: sticky; top: 90px;
+  }
+  .booking-price-row { margin-bottom: 24px; }
+  .booking-from { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  .booking-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px; font-weight: 400; color: var(--deep);
+  }
+  .booking-price span { font-size: 15px; color: var(--muted); font-weight: 300; }
+
+  .date-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--sand); margin-bottom: 1px;
+  }
+  .date-field {
+    padding: 14px 16px; cursor: pointer;
+    transition: background 0.2s;
+    border-right: 1px solid var(--sand);
+  }
+  .date-field:last-child { border-right: none; }
+  .date-field:hover { background: var(--cream); }
+  .date-field-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .date-field-value { font-size: 14px; color: var(--brown); font-weight: 500; }
+
+  .guests-field {
+    border: 1px solid var(--sand); padding: 14px 16px;
+    margin-bottom: 20px; cursor: pointer; transition: background 0.2s;
+  }
+  .guests-field:hover { background: var(--cream); }
+  .guests-field-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .guests-field-value { font-size: 14px; color: var(--brown); font-weight: 500; }
+
+  .book-btn {
+    width: 100%; background: var(--terracotta); color: white;
+    border: none; padding: 18px; font-size: 12px; letter-spacing: 0.18em;
+    text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s;
+  }
+  .book-btn:hover { background: var(--brown); }
+
+  .booking-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 12px; }
+
+  .booking-details { margin-top: 24px; border-top: 1px solid var(--sand); padding-top: 20px; }
+  .booking-line {
+    display: flex; justify-content: space-between;
+    font-size: 14px; color: var(--muted); margin-bottom: 12px;
+  }
+  .booking-line.total {
+    font-size: 15px; color: var(--deep); font-weight: 500;
+    border-top: 1px solid var(--sand); padding-top: 12px; margin-top: 4px;
+  }
+  .booking-tags {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;
+  }
+  .booking-tag {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--terracotta); background: rgba(196,113,74,0.08);
+    padding: 6px 12px;
+  }
+
+  .msg-btn {
+    width: 100%; background: transparent; color: var(--brown);
+    border: 1px solid var(--sand); padding: 14px; font-size: 12px;
+    letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; margin-top: 10px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .msg-btn:hover { background: var(--cream); border-color: var(--brown); }
+
+  /* SPOTLIGHT */
+  .spotlight-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .spotlight-item { position: relative; overflow: hidden; aspect-ratio: 3/4; }
+  .spotlight-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .spotlight-item:hover img { transform: scale(1.06); }
+  .spotlight-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 32px 14px 14px;
+    background: linear-gradient(transparent, rgba(26,18,8,0.8));
+    font-size: 12px; color: rgba(255,255,255,0.9); line-height: 1.4;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep); color: rgba(255,255,255,0.6);
+    padding: 64px 48px 40px; margin-top: 80px;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px; margin-bottom: 48px;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 500; color: var(--terracotta);
+    display: block; margin-bottom: 16px;
+  }
+  .footer-desc { font-size: 13px; line-height: 1.8; }
+  .footer-heading {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.9); margin-bottom: 20px;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--terracotta); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
+    display: flex; justify-content: space-between; font-size: 12px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease forwards; }
+  .fade-up-1 { animation-delay: 0.1s; opacity: 0; }
+  .fade-up-2 { animation-delay: 0.25s; opacity: 0; }
+  .fade-up-3 { animation-delay: 0.4s; opacity: 0; }
+
+  @media (max-width: 1024px) {
+    .content-wrap { grid-template-columns: 1fr; }
+    .right-col { padding-top: 0; }
+    .booking-card { position: static; }
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .content-wrap { padding: 0 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">VillaStays</a>
+  <div class="nav-links">
+    <a href="#">Explore</a>
+    <a href="#">Experiences</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#" class="nav-btn">List Your Home</a>
+  </div>
+</nav>
+
+<!-- HERO GALLERY -->
+<div class="hero-gallery">
+  <div class="main-img fade-up fade-up-1">
+    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80" alt="Villa exterior with pool">
+    <div class="share-row">
+      <div class="share-btn" title="Share">↗</div>
+      <div class="share-btn" title="Save">♡</div>
+    </div>
+  </div>
+  <div class="sub1 fade-up fade-up-2">
+    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=700&q=80" alt="Pool view">
+  </div>
+  <div class="sub2 fade-up fade-up-2">
+    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=700&q=80" alt="Interior bedroom">
+  </div>
+  <div class="sub3 fade-up fade-up-3">
+    <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=700&q=80" alt="Dining area">
+  </div>
+  <div class="sub4 fade-up fade-up-3">
+    <img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=700&q=80" alt="Garden lawn">
+    <div class="gallery-overlay" onclick="alert('Gallery view coming soon')">+ 49 Photos</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content-wrap">
+
+  <!-- LEFT COLUMN -->
+  <div class="left-col">
+
+    <div class="property-header fade-up fade-up-1">
+      <div class="property-location">Udaipur, Rajasthan</div>
+      <h1 class="property-name">Shreevats</h1>
+      <p class="property-tagline">A spiritual, nature-focused retreat just 20 minutes from Fateh Sagar Lake — featuring a private Amrit Kund pool, on-site Moksha temple, and sweeping Aravalli views. Vegetarian hospitality at its finest.</p>
+    </div>
+
+    <div class="quick-facts">
+      <div class="fact">
+        <div class="fact-icon">👥</div>
+        <div class="fact-label">Guests</div>
+        <div class="fact-value">4 – 6</div>
+      </div>
+      <div class="fact">
+        <div class="fact-icon">🛏</div>
+        <div class="fact-label">Bedrooms</div>
+        <div class="fact-value">2 – 3</div>
+      </div>
+      <div class="fact">
+        <div class="fact-icon">🏠</div>
+        <div class="fact-label">Type</div>
+        <div class="fact-value">Entire Home</div>
+      </div>
+      <div class="fact">
+        <div class="fact-icon">🍽</div>
+        <div class="fact-label">Meals</div>
+        <div class="fact-value">Breakfast Incl.</div>
+      </div>
+      <div class="fact">
+        <div class="fact-icon">🏊</div>
+        <div class="fact-label">Pool</div>
+        <div class="fact-value">Private</div>
+      </div>
+    </div>
+
+    <nav class="section-nav">
+      <a href="#about" class="active">About</a>
+      <a href="#amenities">Amenities</a>
+      <a href="#rooms">Rooms</a>
+      <a href="#experiences">Experiences</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#location">Location</a>
+    </nav>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2 class="section-title">About the Home</h2>
+      <p class="section-text">Nestled in the embrace of the Aravalli hills, Shreevats is more than a villa — it is a sanctuary designed for those who seek stillness alongside luxury. The property breathes with spiritual intention: an on-site Moksha temple for morning prayers, the Amrit Kund pool reflecting the pale dawn sky, and lawns that stretch toward ancient ridgelines.</p>
+      <p class="section-text">With three thoughtfully appointed bedrooms, this retreat welcomes families and small groups seeking an immersive Udaipur experience. The caretaker Laxman ji oversees every detail with warmth and professionalism.</p>
+      <a href="#" class="read-more">Read Full Story</a>
+    </section>
+    <div class="divider"></div>
+
+    <!-- AMENITIES -->
+    <section id="amenities">
+      <h2 class="section-title">Amenities</h2>
+      <div class="amenities-grid">
+        <div class="amenity"><div class="amenity-icon">🥐</div><div class="amenity-label">Breakfast Included</div></div>
+        <div class="amenity"><div class="amenity-icon">📶</div><div class="amenity-label">Fibre WiFi</div></div>
+        <div class="amenity"><div class="amenity-icon">❄️</div><div class="amenity-label">AC — All Rooms</div></div>
+        <div class="amenity"><div class="amenity-icon">🚿</div><div class="amenity-label">Ensuite Bathrooms</div></div>
+        <div class="amenity"><div class="amenity-icon">👶</div><div class="amenity-label">Child Friendly</div></div>
+        <div class="amenity"><div class="amenity-icon">♿</div><div class="amenity-label">Elderly Friendly</div></div>
+        <div class="amenity"><div class="amenity-icon">🌿</div><div class="amenity-label">Jain & Veg Meals</div></div>
+        <div class="amenity"><div class="amenity-icon">🏊</div><div class="amenity-label">Private Pool</div></div>
+        <div class="amenity"><div class="amenity-icon">🌄</div><div class="amenity-label">Aravalli Views</div></div>
+      </div>
+      <a href="#" class="read-more">View All 22+ Amenities</a>
+    </section>
+    <div class="divider"></div>
+
+    <!-- ROOMS -->
+    <section id="rooms">
+      <h2 class="section-title">Rooms & Beds</h2>
+      <div class="rooms-grid">
+        <div class="room-card">
+          <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&q=80" alt="Bedroom 1">
+          <div class="room-info">
+            <div class="room-name">Bedroom 1</div>
+            <div class="room-bed">1 King Bed</div>
+            <div class="room-detail">1st Floor · Balcony & Sitout · AC, WiFi<br>Ensuite with luxury shower & toiletries</div>
+          </div>
+        </div>
+        <div class="room-card">
+          <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=400&q=80" alt="Bedroom 2">
+          <div class="room-info">
+            <div class="room-name">Bedroom 2</div>
+            <div class="room-bed">1 Single Bed</div>
+            <div class="room-detail">Ground Floor · Sitout · Fan & WiFi<br>Ensuite with geyser & shower</div>
+          </div>
+        </div>
+        <div class="room-card">
+          <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=400&q=80" alt="Bedroom 3">
+          <div class="room-info">
+            <div class="room-name">Bedroom 3</div>
+            <div class="room-bed">1 King Bed</div>
+            <div class="room-detail">Ground Floor · Garden View · Fan & WiFi<br>Ensuite with geyser & shower</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="divider"></div>
+
+    <!-- EXPERIENCES -->
+    <section id="experiences">
+      <h2 class="section-title">Experiences</h2>
+      <div class="exp-grid">
+        <div class="exp-card">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500&q=80" alt="Barbecue">
+          <div class="exp-overlay">
+            <div class="exp-name">Barbecue</div>
+            <div class="exp-price">From ₹600 / person</div>
+          </div>
+        </div>
+        <div class="exp-card">
+          <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=500&q=80" alt="Bonfire">
+          <div class="exp-overlay">
+            <div class="exp-name">Bonfire Night</div>
+            <div class="exp-price">From ₹1,500 / session</div>
+          </div>
+        </div>
+        <div class="exp-card">
+          <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500&q=80" alt="Movie Night">
+          <div class="exp-overlay">
+            <div class="exp-name">Projector Movie Night</div>
+            <div class="exp-price">From ₹2,000 / session</div>
+          </div>
+        </div>
+        <div class="exp-card">
+          <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=500&q=80" alt="Cricket">
+          <div class="exp-overlay">
+            <div class="exp-name">Soft Ball Cricket</div>
+            <div class="exp-price">Complimentary</div>
+          </div>
+        </div>
+        <div class="exp-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="Archery">
+          <div class="exp-overlay">
+            <div class="exp-name">Archery</div>
+            <div class="exp-price">Complimentary</div>
+          </div>
+        </div>
+        <div class="exp-card">
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500&q=80" alt="Nature Walk">
+          <div class="exp-overlay">
+            <div class="exp-name">Aravalli Nature Walk</div>
+            <div class="exp-price">Complimentary</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="divider"></div>
+
+    <!-- REVIEWS -->
+    <section id="reviews">
+      <h2 class="section-title">Guest Reviews</h2>
+      <div class="rating-hero">
+        <div>
+          <div class="rating-score">5</div>
+          <div class="rating-label">Excellent</div>
+          <div class="rating-sub">Based on 5+ stays</div>
+        </div>
+        <div class="rating-bars">
+          <div class="rating-bar-row">
+            <div class="rating-bar-label">Staff</div>
+            <div class="rating-bar-track"><div class="rating-bar-fill" style="width:100%"></div></div>
+            <div class="rating-num">5</div>
+          </div>
+          <div class="rating-bar-row">
+            <div class="rating-bar-label">Clean</div>
+            <div class="rating-bar-track"><div class="rating-bar-fill" style="width:100%"></div></div>
+            <div class="rating-num">5</div>
+          </div>
+          <div class="rating-bar-row">
+            <div class="rating-bar-label">Meals</div>
+            <div class="rating-bar-track"><div class="rating-bar-fill" style="width:100%"></div></div>
+            <div class="rating-num">5</div>
+          </div>
+          <div class="rating-bar-row">
+            <div class="rating-bar-label">Safety</div>
+            <div class="rating-bar-track"><div class="rating-bar-fill" style="width:100%"></div></div>
+            <div class="rating-num">5</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-cards">
+        <div class="review-card">
+          <div class="reviewer">
+            <div class="reviewer-avatar">A</div>
+            <div>
+              <div class="reviewer-name">Ajay</div>
+              <div class="reviewer-meta">1 guest · 1 Night · Nov 2025</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">A truly exceptional stay. The property exceeded every expectation — peaceful, immaculately maintained, and the caretaker was attentive without being intrusive.</div>
+        </div>
+        <div class="review-card">
+          <div class="reviewer">
+            <div class="reviewer-avatar">Ad</div>
+            <div>
+              <div class="reviewer-name">Aditya</div>
+              <div class="reviewer-meta">1 guest · 1 Night · Nov 2025</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Laxman ji is a wonderful person and a true professional. The setting is magical — waking up to the Aravalli hills is an experience I will carry for a long time.</div>
+        </div>
+      </div>
+    </section>
+    <div class="divider"></div>
+
+    <!-- SPOTLIGHT -->
+    <section>
+      <h2 class="section-title">Moments at Shreevats</h2>
+      <div class="spotlight-grid">
+        <div class="spotlight-item">
+          <img src="https://images.unsplash.com/photo-1603194661411-27f86c0e137e?w=400&q=80" alt="Lawn picnic">
+          <div class="spotlight-caption">Picnic on the Lawn</div>
+        </div>
+        <div class="spotlight-item">
+          <img src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?w=400&q=80" alt="Pool dip">
+          <div class="spotlight-caption">A Dip in the Amrit Kund</div>
+        </div>
+        <div class="spotlight-item">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&q=80" alt="Candlelight dinner">
+          <div class="spotlight-caption">Candlelight Dinner by Projector</div>
+        </div>
+        <div class="spotlight-item">
+          <img src="https://images.unsplash.com/photo-1575381810887-6af72f61e1d0?w=400&q=80" alt="Outdoor games">
+          <div class="spotlight-caption">Outdoor Games on the Lawn</div>
+        </div>
+      </div>
+    </section>
+    <div class="divider"></div>
+
+    <!-- LOCATION -->
+    <section id="location">
+      <h2 class="section-title">Location</h2>
+      <div class="map-placeholder">
+        <div class="map-icon">📍</div>
+        <div>Udaipur, Rajasthan — Near Fateh Sagar Lake</div>
+        <button class="map-btn" onclick="window.open('https://maps.google.com/maps?q=24.643209,73.747566','_blank')">Get Directions</button>
+      </div>
+    </section>
+    <div class="divider"></div>
+
+    <!-- FAQ -->
+    <section>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Can I book only one room?<div class="faq-toggle">+</div></div>
+        <div class="faq-a">No — the entire home must be booked as a unit. This ensures privacy and exclusivity for your group.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Is smoking or alcohol permitted?<div class="faq-toggle">+</div></div>
+        <div class="faq-a">Smoking is allowed strictly outdoors in the garden area. Alcohol is permitted within reasonable limits — we discourage late-night revelry or loud music.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Who manages the villa?<div class="faq-toggle">+</div></div>
+        <div class="faq-a">A dedicated caretaker (Laxman ji) is present on-site and ensures your stay is seamless from arrival to departure.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What is the cancellation policy?<div class="faq-toggle">+</div></div>
+        <div class="faq-a">75% refund for cancellations 15+ days before check-in. 50% refund for 7–15 days prior. No refund within 7 days of check-in.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What type of beds are available?<div class="faq-toggle">+</div></div>
+        <div class="faq-a">Bedrooms 1 and 3 feature king-sized beds. Bedroom 2 has a single bed that can be supplemented with a rollaway for an additional guest.</div>
+      </div>
+    </section>
+    <div class="divider"></div>
+
+    <!-- SIMILAR HOMES -->
+    <section>
+      <h2 class="section-title">You May Also Like</h2>
+      <div class="similar-grid">
+        <div class="similar-card">
+          <div class="similar-img">
+            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500&q=80" alt="Kilakot Haveli">
+            <div class="similar-heart">♡</div>
+          </div>
+          <div class="similar-stars">★ 5.0 (1)</div>
+          <div class="similar-name">Kilakot Haveli</div>
+          <div class="similar-location">Udaipur</div>
+          <div class="similar-meta"><span>8–10 Guests</span><span>4 Bedrooms</span></div>
+          <div class="similar-price">₹25,000 <span>/ night + GST</span></div>
+        </div>
+        <div class="similar-card">
+          <div class="similar-img">
+            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=500&q=80" alt="Aravilla">
+            <div class="similar-heart">♡</div>
+          </div>
+          <div class="similar-stars">★ 5.0 (8)</div>
+          <div class="similar-name">Aravilla</div>
+          <div class="similar-location">Udaipur</div>
+          <div class="similar-meta"><span>6 Guests</span><span>3 Bedrooms</span></div>
+          <div class="similar-price">₹15,750 <span>/ night + GST</span></div>
+        </div>
+        <div class="similar-card">
+          <div class="similar-img">
+            <img src="https://images.unsplash.com/photo-1509600110300-21b9d5fedeb7?w=500&q=80" alt="Camelot">
+            <div class="similar-heart">♡</div>
+          </div>
+          <div class="similar-stars">★ 5.0 (21)</div>
+          <div class="similar-name">Camelot by the Lake</div>
+          <div class="similar-location">Udaipur</div>
+          <div class="similar-meta"><span>6–9 Guests</span><span>3 Bedrooms</span></div>
+          <div class="similar-price">₹18,750 <span>/ night + GST</span></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- RIGHT COLUMN — BOOKING -->
+  <div class="right-col">
+    <div class="booking-card">
+      <div class="booking-price-row">
+        <div class="booking-from">Starting from</div>
+        <div class="booking-price">₹10,500 <span>/ night</span></div>
+      </div>
+      <div class="date-row">
+        <div class="date-field">
+          <div class="date-field-label">Check-In</div>
+          <div class="date-field-value" id="checkin">Select date</div>
+        </div>
+        <div class="date-field">
+          <div class="date-field-label">Check-Out</div>
+          <div class="date-field-value" id="checkout">Select date</div>
+        </div>
+      </div>
+      <div class="guests-field">
+        <div class="guests-field-label">Guests</div>
+        <div class="guests-field-value">4 Adults</div>
+      </div>
+      <button class="book-btn">Book Now — Unlock Best Price</button>
+      <p class="booking-note">You won't be charged yet</p>
+      <div class="booking-details">
+        <div class="booking-line"><span>₹10,500 × 2 nights</span><span>₹21,000</span></div>
+        <div class="booking-line"><span>GST (12%)</span><span>₹2,520</span></div>
+        <div class="booking-line"><span>Cleaning fee</span><span>₹1,500</span></div>
+        <div class="booking-line total"><span>Total</span><span>₹25,020</span></div>
+      </div>
+      <div class="booking-tags">
+        <div class="booking-tag">🎉 Celebrations</div>
+        <div class="booking-tag">🌿 Vegetarian</div>
+        <div class="booking-tag">🏊 Private Pool</div>
+      </div>
+      <button class="msg-btn">Send a Message to Host</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-logo">VillaStays</span>
+      <p class="footer-desc">Curated private villas and retreats across India's most beautiful destinations. Every stay, a story worth telling.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Discover</div>
+      <ul class="footer-links">
+        <li><a href="#">Villas in Udaipur</a></li>
+        <li><a href="#">Villas in Goa</a></li>
+        <li><a href="#">Villas in Kerala</a></li>
+        <li><a href="#">Villas in Himachal</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">List Your Home</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Support</div>
+      <ul class="footer-links">
+        <li><a href="#">Help Centre</a></li>
+        <li><a href="#">Cancellation Policy</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 VillaStays. All rights reserved.</span>
+    <span>Made with care in India 🇮🇳</span>
+  </div>
+</footer>
+
+<script>
+  // Smooth section nav highlighting
+  const navLinks = document.querySelectorAll('.section-nav a');
+  navLinks.forEach(l => l.addEventListener('click', e => {
+    navLinks.forEach(x => x.classList.remove('active'));
+    l.classList.add('active');
+  }));
+
+  // Date picker simulation
+  ['checkin','checkout'].forEach(id => {
+    document.getElementById(id).parentElement.addEventListener('click', () => {
+      const d = prompt(`Enter ${id === 'checkin' ? 'check-in' : 'check-out'} date (e.g. Apr 10, 2026):`);
+      if (d) document.getElementById(id).textContent = d;
+    });
+  });
+
+  // Intersection observer for nav
+  const sections = document.querySelectorAll('section[id]');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const match = document.querySelector(`.section-nav a[href="#${e.target.id}"]`);
+        if (match) match.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
